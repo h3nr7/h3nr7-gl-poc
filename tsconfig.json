@@ -1,0 +1,24 @@
+{
+	"compilerOptions": {
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"noImplicitAny": true,
+		"removeComments": true,
+		"preserveConstEnums": true,
+		"sourceMap": true,
+		"outDir": "./build",	
+		"types": ["react", "@types/jest", "node"],	
+		"typeRoots": ["node_modules/@types", "./src/shared/typings"],
+		"resolveJsonModule": true
+	},
+	"include": [
+		"./src/**/*",
+		"./src/shared/typings/**/*.d.ts"
+	],
+	"exclude": [
+		"node_modules",
+		// "./src/shared/typings",
+		"**/*.spec.ts"
+	]
+	
+}

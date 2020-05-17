@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "sourceMap": true,
+        "noImplicitAny": true,
+        "module": "commonjs",
+        "lib": ["es6", "dom"],
+        "target": "es6",
+        "jsx": "react",
+        "moduleResolution": "node",
+        "types": [
+            "react",
+            "@types/jest",
+            "node"
+        ],
+        "typeRoots": [
+            "../../node_modules/@types",
+            "../shared/typings"
+        ]
+    },
+    "include": [
+        "./**/*.*",
+        "../shared/**/*.*"
+    ],
+    "exclude": [
+      "node_modules",
+      "build",
+      "./**/*.spec.ts"
+    ]
+}

@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "types": ["@types/jest", "node"],	
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "allowJs": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,	
+    "resolveJsonModule": true,
+    "typeRoots": [
+      "node_modules/@types",
+      "../shared/typings"
+    ],
+    "rootDir": "..",
+    "outDir": "../../build"
+  },
+  "include": [
+    "./**/*",
+    "../shared/typings/**/*.d.ts",
+    "../webpack",
+  ],
+  "exclude": [
+    "./**/*.spec.ts"
+  ]
+}
