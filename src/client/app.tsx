@@ -8,7 +8,7 @@ import { Foot } from './components/foot';
 const AppComponent: React.StatelessComponent<{}> = (props) => {
 
     return (
-        <div>
+        <div style={{zIndex:1, position:'relative'}}>
             <Head />
             {props.children}
             <Foot />

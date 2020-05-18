@@ -1,4 +1,4 @@
-FROM node:13.4.0
+FROM node:13.13.0
 COPY . /app
 
 ADD ./package.json /tmp/package.json
