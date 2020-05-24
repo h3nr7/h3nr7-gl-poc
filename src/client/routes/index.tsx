@@ -10,7 +10,7 @@ import { Home } from './home';
 const AppRouterComponent: React.StatelessComponent<{}> = () => {
     return (
         <ParallaxProvider>
-            <GlCanvas />
+            <GlCanvas /> 
             <BrowserRouter>
                 <App>
                     <Switch>

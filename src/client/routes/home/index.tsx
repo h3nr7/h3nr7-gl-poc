@@ -5,7 +5,7 @@ import { IHome } from './home.interface';
 
 const HomeComp:React.FunctionComponent<IHome> = () => {
 
-    return <div>Home now</div>;
+    return <div><img src="https://www.codewars.com/users/henryyp/badges/micro" /></div>;
 }
 
 export const Home = hot(module)(HomeComp);

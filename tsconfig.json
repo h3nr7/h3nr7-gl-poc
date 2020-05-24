@@ -7,6 +7,9 @@
 		"preserveConstEnums": true,
 		"sourceMap": true,
 		"outDir": "./build",	
+		"lib": [
+			"es2019"
+		],
 		"types": ["react", "@types/jest", "node"],	
 		"typeRoots": ["node_modules/@types", "./src/shared/typings"],
 		"resolveJsonModule": true
