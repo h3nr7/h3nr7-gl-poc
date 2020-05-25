@@ -4,7 +4,7 @@ import * as Three from 'three';
 import { IGlCanvasProps, ISize } from './glcanvas.interface';
 import { useResize } from './resize.hook'
 import { ContainerDiv, Canvas } from './glcanvas.styles';
-import Terrain, { dummy } from './terrain';
+import Terrain from './terrain';
 import { hot } from 'react-hot-loader';
 
 const GlCanvasComp:React.FC<IGlCanvasProps> = ({}) => {
