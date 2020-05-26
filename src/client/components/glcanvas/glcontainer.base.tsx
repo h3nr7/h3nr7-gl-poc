@@ -1,5 +1,9 @@
-import { WebGLRenderer, PerspectiveCamera, Group, Scene, Mesh, BoxGeometry, MeshBasicMaterial, MathUtils, BufferGeometry, Float32BufferAttribute, PointsMaterial, Points, LineBasicMaterial, Line, Camera, Renderer, Object3D } from 'three';
-import { ObjectName, ISize, IPosition } from './glcanvas.interface';
+import { WebGLRenderer, PerspectiveCamera, Group, 
+    Scene, Mesh, BoxGeometry, MeshBasicMaterial,
+     MathUtils, BufferGeometry, Float32BufferAttribute, 
+     PointsMaterial, Points, LineBasicMaterial, Line, Camera, Renderer, Object3D } from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { ObjectName, ISize } from './glcanvas.interface';
 
 /**
  * Base Interface for Gl Containers
@@ -9,6 +13,7 @@ export interface IBaseGlContainer {
     scene:Scene;
     renderer:WebGLRenderer;
     animationFrameId:number;
+    hasOrbitControl:boolean;
 
     updateSize: (size?:ISize) => void;
     animate: () => void;
@@ -25,8 +30,10 @@ export default class BaseGlContainer implements IBaseGlContainer {
     scene:Scene;
     renderer:WebGLRenderer;
     animationFrameId: number;
+    hasOrbitControl: boolean;
+    controls:OrbitControls;
 
-    constructor(canvas:HTMLCanvasElement, renderer?:WebGLRenderer) {
+    constructor(canvas:HTMLCanvasElement, renderer?:WebGLRenderer, hasOrbitControl?:boolean) {
         // initialise renderer
         renderer = renderer || new WebGLRenderer({
             alpha: false,
@@ -36,6 +43,10 @@ export default class BaseGlContainer implements IBaseGlContainer {
 
         const camera = new PerspectiveCamera();
         const scene = new Scene();
+        if(hasOrbitControl) {
+            const control = new OrbitControls( camera, renderer.domElement );
+            this.controls = control;
+        }
 
         // name object
         camera.name = ObjectName.Camera;
@@ -45,6 +56,7 @@ export default class BaseGlContainer implements IBaseGlContainer {
         this.camera = camera;
         this.scene = scene;
         this.renderer = renderer;
+
     }
 
     // add 3d objects to scene
@@ -58,6 +70,7 @@ export default class BaseGlContainer implements IBaseGlContainer {
     animate(): void {
         this.render();
         this.animationFrameId = requestAnimationFrame(this.animate.bind(this));
+        if(this.hasOrbitControl) this.controls.update();
     }
 
     // render

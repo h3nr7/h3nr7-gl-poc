@@ -17,7 +17,7 @@ const GlCanvasComp:React.FC<IGlCanvasProps> = ({}) => {
 
     useEffect(() => {
         const container = containerRef.current;
-        const terrainInstance = new Terrain(canvasRef.current);
+        const terrainInstance = new Terrain(canvasRef.current, true);
         container.appendChild(terrainInstance.renderer.domElement);
         terrainInstance.animate();
         terrainRef.current = terrainInstance;

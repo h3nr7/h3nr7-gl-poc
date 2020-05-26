@@ -35,7 +35,7 @@ export function useResize<T>(
         });
         resizeObserver.observe(mount);
 
-        return ():void {
+        return ():void => {
             resizeObserver.unobserve(mount);
         }
 
