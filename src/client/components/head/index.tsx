@@ -6,7 +6,7 @@ import { IHead } from './head.interface';
 const HeadComp:React.StatelessComponent<IHead> = () => {
 
     return (
-        <div>Head</div>
+        <div></div>
     );
 }
 

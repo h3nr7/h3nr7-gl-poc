@@ -5,15 +5,17 @@ import { ParallaxProvider } from 'react-scroll-parallax';
 import { App } from "../app";
 import { GlCanvas } from '../components/glcanvas';
 import { Home } from './home';
+import { Delaunay } from './delaunay';
 
 
 const AppRouterComponent: React.StatelessComponent<{}> = () => {
     return (
         <ParallaxProvider>
-            <GlCanvas /> 
+            {/* <GlCanvas />  */}
             <BrowserRouter>
                 <App>
                     <Switch>
+                        <Route exact path="/delaunay" component={Delaunay} />
                         <Route exact path="/" component={Home} />
                     </Switch>
                 </App>

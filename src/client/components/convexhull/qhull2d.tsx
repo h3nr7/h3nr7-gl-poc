@@ -1,40 +1,28 @@
+import BaseGlContainer from "../glcanvas/glcontainer.base"
 import { 
-    Group, Mesh, MathUtils, BufferGeometry, 
-    Float32BufferAttribute, PointsMaterial, 
-    Points, LineBasicMaterial, Line, 
-    Color, Object3D, Vector3  } from 'three';
-import { ObjectName } from './glcanvas.interface';
-import BaseGlContainer from './glcontainer.base';
+    WebGLRenderer, Vector3, MathUtils, BufferGeometry, Float32BufferAttribute,
+    Object3D, PointsMaterial, Points, Line, LineBasicMaterial, Color
+} from 'three';
 import { calOrthDistance, calBaryCentric, findMinMaxPoint } from '../../libs/glmath.helper';
 
-export default class Terrain extends BaseGlContainer {
+export default class QHull2D extends BaseGlContainer {
 
     totPoints:number = 300;
     points:Vector3[] = [];
 
-    constructor(canvas: HTMLCanvasElement, hasOrbitControl:boolean) {
+    constructor(canvas:HTMLCanvasElement, hasOrbitControl:boolean = true) {
         super(canvas, null, hasOrbitControl);
 
-        const terrainPoints = new Mesh();
-        const terrain = new Group();
-        terrain.name = ObjectName.Terrain;
+        this._init();
+    }
 
+    _init() {
         // set camera pos
         this.camera.position.z = 200;
         this.camera.lookAt( 0, 0, 0 );
 
-        // create set of random points
-        for ( let i=0; i<this.totPoints; i++) {
-            let pos:Vector3 = new Vector3(
-                MathUtils.randFloatSpread(100), 
-                MathUtils.randFloatSpread(100), 
-                0
-                // MathUtils.randFloatSpread(100)
-            );
-            this.points.push(pos);
-        }
+        this._createRandomPoints();
 
-            
         let uIndexes:number[] = this.indexArrGenerator(this.points.length);
 
         const { minIndex, maxIndex, minPoint, maxPoint } = findMinMaxPoint(this.points);
@@ -56,19 +44,15 @@ export default class Terrain extends BaseGlContainer {
         const botOutput = this.stepper(botIndexes, [minIndex], minIndex, maxIndex);
         const botLine = botOutput.map(item => this.points[item].toArray());
 
-        this.scene.add(this.createLines(topLine.flat(1), 0XFFFF00));
-        this.scene.add(this.createLines(botLine.flat(1), 0X00FFFF));
-
-        // add to group
-        terrain.add(terrainPoints);
-        this.scene.add(this.camera);
-        this.scene.add(terrain);
+        this.scene.add(this._createLines(topLine.flat(1), 0XFFFF00));
+        this.scene.add(this._createLines(botLine.flat(1), 0X00FFFF));
 
         // this.scene.add(this.createLines([maxPoint.toArray(), minPoint.toArray()].flat(1), 0X00FF00));
-        
-        const unfilteredPoints = uIndexes.map<Array<number>>(i => this.points[i].toArray());
-        this.scene.add(this.createPoints(unfilteredPoints.flat(1), 0xFFFFFF));
 
+        this.scene.add(this.camera);
+
+        const unfilteredPoints = uIndexes.map<Array<number>>(i => this.points[i].toArray());
+        this.scene.add(this._createPoints(unfilteredPoints.flat(1), 0xFFFFFF));
     }
 
     stepper(indexes:number[], hulls:number[], p0:number, p1:number):number[] {
@@ -111,7 +95,6 @@ export default class Terrain extends BaseGlContainer {
         return this.stepper(cIndexes, [...tmpHull], maxDistanceIndex, p1);
     }
 
-
     findMaxDistancePoint(pA:Vector3, pB:Vector3, indexes:number[]):number {
         let distance:Array<{index:number, value:number}> = [];
         for(let i of indexes) {
@@ -129,12 +112,12 @@ export default class Terrain extends BaseGlContainer {
         return maxDistance.index;
     }
 
-    /**
+        /**
      * create line to add to scene
      * @param vertices
      * @param color 
      */
-    createLines(vertices:number[], color:string | number | Color):Object3D {
+    _createLines(vertices:number[], color:string | number | Color):Object3D {
         const lineGeo = new BufferGeometry();
         lineGeo.setAttribute('position', new Float32BufferAttribute(vertices, 3));
         const lineMat = new LineBasicMaterial({ color });
@@ -146,15 +129,29 @@ export default class Terrain extends BaseGlContainer {
      * @param vertices
      * @param color 
      */
-    createPoints(vertices:number[], color:string | number | Color):Object3D {
+    _createPoints(vertices:number[], color:string | number | Color):Object3D {
         const pointGeo = new BufferGeometry();
         pointGeo.setAttribute('position', new Float32BufferAttribute(vertices, 3));
         const pointMat = new PointsMaterial({ color });
         return new Points(pointGeo, pointMat);
     }
 
+    _createRandomPoints() {
+        // create set of random points
+        for ( let i=0; i<this.totPoints; i++) {
+            let pos:Vector3 = new Vector3(
+                MathUtils.randFloatSpread(100), 
+                MathUtils.randFloatSpread(100), 
+                0
+                // MathUtils.randFloatSpread(100)
+            );
+            this.points.push(pos);
+        }
+    }
+
     indexArrGenerator(n:number):number[] {
         return Array.from({length: n}, (_, i) => i);
     }
+
 
 }

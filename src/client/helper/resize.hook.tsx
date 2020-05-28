@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
 
-import {  ISize } from './glcanvas.interface';
+import {  ISize } from '../components/glcanvas/glcanvas.interface';
 export function useResize<T>(
     mountRef: React.RefObject<HTMLDivElement>,
     initialSize?: ISize

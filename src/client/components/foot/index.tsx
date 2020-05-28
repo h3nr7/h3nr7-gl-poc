@@ -6,7 +6,7 @@ import { IFoot } from './foot.interface';
 const FootComp:React.StatelessComponent<IFoot> = () => {
 
 
-    return <div>Foot</div>;
+    return <div></div>;
 };
 
 export const Foot = hot(module)(FootComp);

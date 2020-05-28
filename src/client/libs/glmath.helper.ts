@@ -1,4 +1,4 @@
-import { IMinMaxPoint, IBaryCentric, AxisNum } from './glcanvas.interface'
+import { IMinMaxPoint, IBaryCentric, AxisNum } from '../components/glcanvas/glcanvas.interface'
 import { Vector3 } from 'three';
 
 

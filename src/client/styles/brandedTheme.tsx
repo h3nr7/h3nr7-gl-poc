@@ -10,7 +10,7 @@ export default function brandedTheme(options: ThemeOptions) {
             },
             primary: {
                 light: "#9ba3c2",
-                main: "#374785",
+                main: "#eeeeee",
                 dark: "#24305E",
                 contrastText: "#ebedf3"
             },
