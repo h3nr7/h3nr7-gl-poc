@@ -18,5 +18,5 @@ export const Polyhedra:React.FC<IPolyhedra> = ({}) => {
             {/* <Canvas ref={canvasRef} /> */}
         </ContainerDiv>
     );
-})
+};
 
