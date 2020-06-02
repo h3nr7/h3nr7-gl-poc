@@ -6,6 +6,8 @@ import { App } from "../app";
 import { GlCanvas } from '../components/glcanvas';
 import { Home } from './home';
 import { Delaunay } from './delaunay';
+import { Convexhull } from './convexhull';
+import { Polyhedron } from './polyhedron';
 
 
 const AppRouterComponent: React.StatelessComponent<{}> = () => {
@@ -15,8 +17,9 @@ const AppRouterComponent: React.StatelessComponent<{}> = () => {
             <BrowserRouter>
                 <App>
                     <Switch>
-                        <Route exact path="/delaunay" component={Delaunay} />
+                        <Route exact path="/convexhull/2d" component={Convexhull} />
                         <Route exact path="/" component={Home} />
+                        <Route exact path="/polyhedron" component={Polyhedron} />
                     </Switch>
                 </App>
             </BrowserRouter>

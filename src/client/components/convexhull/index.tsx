@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import * as Three from 'three';
 import { IConvexhullProps } from './convexhull.interface';
 import { useResize } from '../../helper/resize.hook'
-import { ContainerDiv } from './convexhull.styles';
+import { ContainerDiv } from '../../styles/base.styles';
 import QHull2D from './qhull2d';
 import JarvisMarch from './jarvismarch'
 import { hot } from 'react-hot-loader';
