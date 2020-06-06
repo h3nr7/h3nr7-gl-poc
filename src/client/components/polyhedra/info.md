@@ -1,4 +1,4 @@
-# 00 Polygons
+# Polygons
 
 ### Fundametals of Polygons
 * Polygons are to planar geometry as integers are to numerical mathematics.
@@ -13,7 +13,7 @@
 
 Boundary of $P$ is $\partial P$
 
-The two components of $\R^2 \char`\\ \partial P$ are the bounded interior and the unbounded exterior. (The symbol \ indicates set subtraction: $A\char`\\B$ is the set of points in $A$ but not in $B$)
+The two components of $\mathbb{R}^2$ \ $\partial P$ are the bounded interior and the unbounded exterior. (The symbol \ indicates set subtraction: $A$ \ $B$ is the set of points in $A$ but not in $B$)
 
 ### Polyhedron
 * Polyhedron is the 3D version of polygons.

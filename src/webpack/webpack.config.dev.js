@@ -86,29 +86,40 @@ module.exports = {
             {
                 test: /\.(jpe?g|gif|png|svg)$/i,
                 loader: "file-loader",
+                exclude: path.resolve(process.cwd(), 'node_modules')
+            },
+            {
+                test: /\.md$/,
+                loader: "raw-loader",
+                exclude: path.resolve(process.cwd(), 'node_modules')
             },
             {
                 test: /\.json$/,
                 loader: "json-loader",
+                exclude: path.resolve(process.cwd(), 'node_modules')
             },
             {
                 test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
                 loader: "file-loader",
-                include: [/** paths to node_module or external css */] 
+                include: [/** paths to node_module or external css */], 
+                exclude: path.resolve(process.cwd(), 'node_modules')
             },
             {
                 test: /\.(woff|woff2)$/,
                 loader: "url-loader?prefix=font/&limit=5000",
+                exclude: path.resolve(process.cwd(), 'node_modules'),
                 include: [/** paths to node_module or external css */]
             },
             {
                 test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
                 loader: "url-loader?limit=10000&mimetype=application/octet-stream",
+                exclude: path.resolve(process.cwd(), 'node_modules'),
                 include: [/** paths to node_module or external css */]
             },
             {
                 test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
                 loader: "url-loader?limit=10000&mimetype=image/svg+xml",
+                exclude: path.resolve(process.cwd(), 'node_modules'),
                 include: [/** paths to node_module or external css */]
             }
         ]

@@ -17,9 +17,10 @@ const AppRouterComponent: React.StatelessComponent<{}> = () => {
             <BrowserRouter>
                 <App>
                     <Switch>
-                        <Route exact path="/convexhull/2d" component={Convexhull} />
                         <Route exact path="/" component={Home} />
+                        {/* <Route exact oath="/polygon" component={Polygon} /> */}
                         <Route exact path="/polyhedron" component={Polyhedron} />
+                        <Route exact path="/convexhull/2d" component={Convexhull} />
                     </Switch>
                 </App>
             </BrowserRouter>
