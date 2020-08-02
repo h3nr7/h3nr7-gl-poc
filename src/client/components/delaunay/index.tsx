@@ -8,23 +8,36 @@ import { hot } from 'react-hot-loader';
 
 const DelaunayComp:React.FC<IDelaunay> = ({}) => {
 
-    type AlgorithmType = DelaunayObj;
-
     // all refs
     const canvasRef = useRef<HTMLCanvasElement>();
     const containerRef = useRef<HTMLDivElement>();
     const classRef = useRef<DelaunayObj>();
     const size = useResize(containerRef, undefined);
+    const [pointData, setPointData] = useState([]);
 
     useEffect(() => {
+
+        let canvasInstance:DelaunayObj;
         const container = containerRef.current;
-        let canvasInstance:AlgorithmType;
 
+    
+        const init = async () => {
+            const res = await Promise.all([
+                fetch('/api/geo/gdal?url=http://localhost:3000/static/N51W001.tif&w=240&h=240'),
+                fetch('/api/geo/gdal?url=http://localhost:3000/static/N51E000.tif&w=240&h=240')
+            ]);
 
-        container.appendChild(canvasInstance.renderer.domElement);
-        canvasInstance.animate();
-        classRef.current = canvasInstance;
-        classRef.current.updateSize(size);
+        
+            const datum = await Promise.all(res.map(r => r.json()));
+            setPointData(datum);
+            canvasInstance = new DelaunayObj(canvasRef.current, datum);
+            container.appendChild(canvasInstance.renderer.domElement);
+            canvasInstance.animate();
+            classRef.current = canvasInstance;
+            classRef.current.updateSize(size);
+        };
+
+        init();
 
         return ():void => {
             if(canvasInstance) {
@@ -37,14 +50,12 @@ const DelaunayComp:React.FC<IDelaunay> = ({}) => {
 
     useEffect(() => {
         if(classRef.current) classRef.current.updateSize(size);
-    }, [size])
+    }, [size, pointData])
 
 
 
     return (
-        <ContainerDiv ref={containerRef}>
-            {/* <Canvas ref={canvasRef} /> */}
-        </ContainerDiv>
+        <ContainerDiv ref={containerRef} />
     );
 }
 

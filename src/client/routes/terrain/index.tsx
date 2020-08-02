@@ -13,4 +13,4 @@ const TerrainComp:React.FC<ITerrain> = ({}) => {
     );
 }
 
-export const Polyhedron = hot(module)(TerrainComp);
+export const Terrain = hot(module)(TerrainComp);

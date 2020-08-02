@@ -53,6 +53,10 @@ module.exports = {
                 ]
             },
             {
+                test: /\.(vert|frag|glsl)$/i,
+                loader: "raw-loader",
+            },
+            {
                 enforce: "pre",
                 test: /\.js$/,
                 loader: "source-map-loader"

@@ -84,6 +84,11 @@ module.exports = {
                 ]
             },
             {
+                test: /\.(vert|frag|glsl)$/i,
+                loader: "raw-loader",
+                exclude: path.resolve(process.cwd(), 'node_modules')               
+            },
+            {
                 test: /\.(jpe?g|gif|png|svg)$/i,
                 loader: "file-loader",
                 exclude: path.resolve(process.cwd(), 'node_modules')

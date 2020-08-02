@@ -14,6 +14,7 @@ export interface IBaseGlContainer {
     renderer:WebGLRenderer;
     animationFrameId:number;
     hasOrbitControl:boolean;
+    count:number;
 
     updateSize: (size?:ISize) => void;
     animate: () => void;
@@ -32,6 +33,7 @@ export default class BaseGlContainer implements IBaseGlContainer {
     animationFrameId: number;
     hasOrbitControl: boolean;
     controls:OrbitControls;
+    count:number;
 
     constructor(canvas:HTMLCanvasElement, renderer?:WebGLRenderer, hasOrbitControl?:boolean) {
         // initialise renderer
@@ -41,7 +43,7 @@ export default class BaseGlContainer implements IBaseGlContainer {
             canvas
         });
 
-        const camera = new PerspectiveCamera();
+        const camera = new PerspectiveCamera(50, 1, 0.1, 3200);
         const scene = new Scene();
         if(hasOrbitControl) {
             const control = new OrbitControls( camera, renderer.domElement );
@@ -56,6 +58,7 @@ export default class BaseGlContainer implements IBaseGlContainer {
         this.camera = camera;
         this.scene = scene;
         this.renderer = renderer;
+        this.count = 0;
 
     }
 
@@ -68,6 +71,7 @@ export default class BaseGlContainer implements IBaseGlContainer {
 
     // animate
     animate(): void {
+        this.count++;
         this.render();
         this.animationFrameId = requestAnimationFrame(this.animate.bind(this));
         if(this.hasOrbitControl) this.controls.update();

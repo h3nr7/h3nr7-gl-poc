@@ -1,6 +1,8 @@
 import * as express from 'express';
 import * as path from 'path';
 import * as loadjsonfile from "load-json-file";
+
+
 export const viewController = express.Router();
 
 const isDevMode = process.env.NODE_ENV === "development" || false;
@@ -23,7 +25,7 @@ viewController.use((req: express.Request, res: express.Response) => {
         image: 'some image',
         type: 'some type'
     };
-
+    
     res.render('home', { 
         layout: 'default',
         title,

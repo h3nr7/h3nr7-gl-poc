@@ -8,6 +8,7 @@ import { Home } from './home';
 import { Delaunay } from './delaunay';
 import { Convexhull } from './convexhull';
 import { Polyhedron } from './polyhedron';
+import { Terrain } from "./terrain";
 
 
 const AppRouterComponent: React.StatelessComponent<{}> = () => {
@@ -21,6 +22,7 @@ const AppRouterComponent: React.StatelessComponent<{}> = () => {
                         {/* <Route exact oath="/polygon" component={Polygon} /> */}
                         <Route exact path="/polyhedron" component={Polyhedron} />
                         <Route exact path="/convexhull/2d" component={Convexhull} />
+                        <Route exact path="/terrain" component={Terrain} />
                     </Switch>
                 </App>
             </BrowserRouter>
